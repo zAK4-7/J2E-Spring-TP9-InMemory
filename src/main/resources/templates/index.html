@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>In-memory Spring Security</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="navbar">
+    <span class="brand">Spring Security - in-memory authentication</span>
+    <span class="who" th:if="${username}" th:text="'Signed in as ' + ${username}"></span>
+</div>
+
+<div class="card">
+    <h1>Public area</h1>
+    <p class="muted">This page is open to everyone (<code>permitAll()</code>).</p>
+
+    <div class="alert info" th:if="${username}" th:text="'Welcome back, ' + ${username} + '!'"></div>
+
+    <div class="links">
+        <a th:href="@{/user/dashboard}">User area</a>
+        <a th:href="@{/admin/dashboard}">Admin area</a>
+        <a th:href="@{/login}">Sign in</a>
+    </div>
+
+    <form th:action="@{/logout}" method="post" th:if="${username}">
+        <button type="submit" class="danger">Sign out</button>
+    </form>
+</div>
+</body>
+</html>
